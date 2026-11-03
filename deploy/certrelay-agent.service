@@ -1,0 +1,17 @@
+[Unit]
+Description=CertRelay certificate pull, install and verification
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+# Host Nginx example. Use a dedicated user/capabilities where local service policy permits.
+User=root
+Group=root
+ExecStart=/opt/certrelay-agent/node/bin/node /opt/certrelay-agent/scripts/certrelay-agent.mjs sync --identity /etc/certrelay-agent/identity.json --config /etc/certrelay-agent/config.json
+UMask=0077
+PrivateTmp=true
+ProtectHome=true
+TimeoutStartSec=4min
+MemoryMax=128M
+TasksMax=48

@@ -1,0 +1,11 @@
+[Unit]
+Description=Poll CertRelay for authorized certificate updates
+
+[Timer]
+OnBootSec=2min
+OnUnitInactiveSec=30min
+RandomizedDelaySec=3min
+Unit=certrelay-agent.service
+
+[Install]
+WantedBy=timers.target

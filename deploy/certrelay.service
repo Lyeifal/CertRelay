@@ -1,0 +1,36 @@
+[Unit]
+Description=CertRelay personal certificate control plane
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=certrelay
+Group=certrelay
+WorkingDirectory=/opt/certrelay
+EnvironmentFile=/etc/certrelay/server.env
+ExecStart=/opt/certrelay/node/bin/node /opt/certrelay/scripts/server.mjs
+StateDirectory=certrelay
+StateDirectoryMode=0700
+UMask=0077
+Restart=on-failure
+RestartSec=10
+# Wait for in-flight DNS/ACME work to finish and clean up its plaintext workspace.
+TimeoutStopSec=20min
+KillMode=control-group
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+CapabilityBoundingSet=
+ReadWritePaths=/dev/shm
+MemoryMax=384M
+TasksMax=96
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,7 @@
+{
+  "mode": "managed",
+  "directoryRoot": "/etc/certrelay-certs",
+  "check": ["/usr/sbin/nginx", "-t"],
+  "reload": ["/usr/bin/systemctl", "reload", "nginx"],
+  "verify": { "host": "127.0.0.1", "port": 443, "servername": "example.com" }
+}

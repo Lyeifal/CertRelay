@@ -1,0 +1,61 @@
+{
+  "name": "certrelay",
+  "version": "0.3.1",
+  "type": "module",
+  "description": "A lightweight personal certificate distribution console",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lyeifal/CertRelay.git"
+  },
+  "bugs": { "url": "https://github.com/Lyeifal/CertRelay/issues" },
+  "homepage": "https://github.com/Lyeifal/CertRelay#readme",
+  "files": [
+    "agent",
+    "server",
+    "shared",
+    "scripts/server.mjs",
+    "scripts/certrelay.mjs",
+    "scripts/install.mjs",
+    "scripts/init-admin.mjs",
+    "scripts/reset-admin.mjs",
+    "scripts/certrelay-agent.mjs",
+    "src",
+    "index.html",
+    "favicon.svg",
+    "deploy/agent-config.example.json",
+    "deploy/certrelay-agent.service",
+    "deploy/certrelay-agent.timer",
+    "deploy/certrelay.service",
+    "deploy/nginx.example.conf",
+    "deploy/server.env.example",
+    "README.md",
+    "README.en.md",
+    "docs/ENROLLMENT.md",
+    "docs/INSTALL.md",
+    "docs/BEGINNER.md"
+  ],
+  "bin": {
+    "certrelay": "scripts/certrelay.mjs",
+    "certrelay-agent": "scripts/certrelay-agent.mjs",
+    "certrelay-server": "scripts/server.mjs",
+    "certrelay-init": "scripts/init-admin.mjs",
+    "certrelay-reset-password": "scripts/reset-admin.mjs"
+  },
+  "scripts": {
+    "dev": "node scripts/server.mjs",
+    "preview": "node scripts/dev-server.mjs",
+    "start": "node scripts/server.mjs",
+    "init": "node scripts/init-admin.mjs",
+    "reset-password": "node scripts/reset-admin.mjs",
+    "agent": "node scripts/certrelay-agent.mjs",
+    "verify:production": "node scripts/verify-production.mjs",
+    "check": "node --experimental-vm-modules scripts/check.mjs",
+    "test": "node scripts/verify-production.mjs && node test/verify-security.mjs && node test/verify-agent.mjs && node test/verify-acme.mjs && node test/verify-admin-cli.mjs",
+    "verify:api": "node scripts/verify-production.mjs",
+    "verify:enrollment": "node scripts/verify-enrollment.mjs",
+    "verify:dom": "node scripts/verify-dom.mjs",
+    "verify:live-ui": "node test/verify-live-ui.mjs",
+    "verify:ui": "node scripts/verify-ui.mjs"
+  },
+  "engines": { "node": ">=20" }
+}

@@ -1,0 +1,43 @@
+node_modules/
+artifacts/
+.env
+*.local
+certs/
+secrets/
+pb_data/
+.certrelay-dev-state.json
+.tools/
+.gocache/
+dist/
+data/
+*.tmp
+
+# Local caches, packages and deployment bundles
+/.npm-cache/
+/tmp/
+*.tgz
+*.tar.gz
+*.zip
+
+# Never publish operational state or private credentials
+.env.*
+!.env.example
+*.env
+master.key
+state.json
+identity.json
+server.lock
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Personal server inventories, diagnostics and deployment helpers stay local
+/diagnostics/
+/remote-*.sh
+/deploy/*test*
+/docs/*
+!/docs/README.md
+!/docs/BEGINNER.md
+!/docs/INSTALL.md
+!/docs/ENROLLMENT.md

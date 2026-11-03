@@ -1,0 +1,14 @@
+.npm-cache/
+*.tar.gz
+*.zip
+test/
+diagnostics/
+deploy/*test*
+docs/PRODUCTION-IMPLEMENTATION.md
+docs/DEPLOYMENT-TEST-20261030.md
+scripts/check.mjs
+scripts/dev-server.mjs
+scripts/test-tls-gateway.mjs
+scripts/verify-*.mjs
+src/app.js
+src/styles.css
