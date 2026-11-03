@@ -32,7 +32,8 @@
     "README.en.md",
     "docs/ENROLLMENT.md",
     "docs/INSTALL.md",
-    "docs/BEGINNER.md"
+    "docs/BEGINNER.md",
+    "docs/PUBLISHING.md"
   ],
   "bin": {
     "certrelay": "scripts/certrelay.mjs",

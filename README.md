@@ -184,6 +184,12 @@ npm test
 
 旧原型 `npm run preview` 没有生产鉴权，不可暴露到公网。测试通过不代表全部 Linux 首装、真实公网 ACME 或所有 ARM 设备已经验收。
 
+## 自动发布 npm
+
+仓库提供 `.github/workflows/publish.yml`：发布稳定版 GitHub Release 后，先校验版本与运行测试，再通过 npm Trusted Publishing 发布。普通 push 不会发布，也不需要保存长期 npm Token。
+
+首次需在 GitHub 创建 `npm` 环境，并在 npm 包设置中配置可信发布者：用户 `Lyeifal`、仓库 `CertRelay`、工作流 `publish.yml`、环境 `npm`，允许 `npm publish`。详细步骤见[自动发布说明](docs/PUBLISHING.md)。配置文件本身不代表已成功完成首次自动发布，也不会自动升级线上服务器。
+
 ## 更多文档
 
 - [小白使用指南](docs/BEGINNER.md)：密码、证书路径、登记、Nginx 和排障。

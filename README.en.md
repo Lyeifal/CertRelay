@@ -184,6 +184,12 @@ Optional real-API + DOM tests: `npm run verify:live-ui`. Supply jsdom separately
 
 The legacy `npm run preview` prototype has no production authentication and must not be exposed publicly. Passing tests does not mean fresh Linux installations, real public ACME issuance, or every ARM device have been validated.
 
+## Automated npm publishing
+
+`.github/workflows/publish.yml` validates and tests a stable GitHub Release before publishing through npm Trusted Publishing. Ordinary pushes do not publish, and no long-lived npm token is needed.
+
+First create a GitHub environment named `npm` and configure the npm trusted publisher: owner `Lyeifal`, repository `CertRelay`, workflow `publish.yml`, environment `npm`, with `npm publish` allowed. See the [publishing guide](docs/PUBLISHING.md) (Chinese). Adding the workflow does not validate the first real OIDC publication or upgrade deployed servers.
+
 ## Documentation
 
 The supporting guides currently use Chinese:

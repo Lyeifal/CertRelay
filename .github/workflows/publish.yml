@@ -1,0 +1,88 @@
+name: Publish to npm
+
+# A normal push, tag push, draft, or prerelease does not publish a package.
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: npm-publish-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    name: Validate release and run tests
+    if: github.repository == 'Lyeifal/CertRelay' && github.event.release.prerelease == false
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out the release commit
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+          package-manager-cache: false
+
+      - name: Validate the package and release tag
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { readFile } from 'node:fs/promises';
+          const pkg = JSON.parse(await readFile('package.json', 'utf8'));
+          assert.equal(pkg.name, 'certrelay', 'Unexpected npm package name');
+          assert.match(pkg.version, /^\d+\.\d+\.\d+$/, 'Only stable versions are published');
+          assert.equal(process.env.RELEASE_TAG, `v${pkg.version}`, 'Release tag must be v + package.json version');
+          assert.equal(pkg.repository.url, `git+https://github.com/${process.env.GITHUB_REPOSITORY}.git`, 'Package repository must match this workflow');
+          console.log(`Validated ${pkg.name}@${pkg.version} for ${process.env.RELEASE_TAG}`);
+          NODE
+
+      # There are no runtime dependencies or lockfile; npm ci is not needed.
+      - name: Check source syntax
+        run: npm run check
+
+      - name: Run automated tests
+        run: npm test
+
+      - name: Inspect package contents without publishing
+        run: npm pack --dry-run
+
+  publish:
+    name: Publish using npm trusted publishing
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: npm
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Check out the same tested release commit
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+
+      - name: Set up Node.js and the public npm registry
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+
+      # OIDC requires npm >= 11.5.1; pin the CLI rather than relying on the runner.
+      - name: Install an OIDC-capable npm CLI
+        run: npm install --global npm@11.21.1 --ignore-scripts --no-audit --no-fund
+
+      - name: Publish the public package with provenance
+        run: npm publish --access public --provenance --ignore-scripts
