@@ -9,7 +9,7 @@
 3. [客户端登记协议](ENROLLMENT.md)：邀请有效期、一次性校验、长期令牌和安全边界。
 4. [自动发布 npm](PUBLISHING.md)：配置可信发布者、npm 环境和 GitHub Release 发布流程。
 
-截至 2026-11-03：公共 npm 为 0.3.0；本仓库开发版为 0.3.1，尚未发布 npm。统一的 init-admin、reset-password、paths 子命令属于 0.3.1。
+截至 2026-11-03：公共 npm 已自动发布 0.3.1，latest 指向 0.3.1，包含统一的 init-admin、reset-password、paths 子命令。首次 GitHub Actions / OIDC 发布和公共包干净安装检查已通过；不代表新服务器首装或线上升级已完成。
 
 支持文档目前以中文为主，英文总览见 English README。示例使用 example.com，请替换成实际域名、路径和服务设置。
 

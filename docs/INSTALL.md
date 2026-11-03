@@ -4,7 +4,7 @@
 
 ## 状态与适用范围
 
-截至 2026-11-03，公共 npm 为 0.3.0，本仓库为尚未发布 npm 的开发版 0.3.1。
+截至 2026-11-03，公共 npm 已发布 0.3.1，latest 指向 0.3.1。首次 GitHub Actions/OIDC 发布及公共包干净安装检查已通过，生产服务器没有自动升级。
 
 安装器通过本地语法、dry-run 和打包入口测试，但尚未完成全新 Linux/systemd 环境端到端验收。以下是安装流程说明，不是保证任意机器一次成功的部署承诺。已有生产部署不要重跑安装器或使用 `--force` 来更新。
 
@@ -23,11 +23,11 @@ npm 包没有运行时依赖，但不包含这些系统组件。安装器会使�
 以下按 root 终端书写：
 
 ```bash
-npm install -g certrelay@0.3.0
+npm install -g certrelay@0.3.1
 certrelay --help
 ```
 
-也可在已克隆的源码目录中 `npm install -g .` 安装本仓库开发版；这只安装 CLI，不会自动升级独立复制到 /opt 下的服务。
+也可在已克隆的源码目录中 `npm install -g .` 安装本仓库源码版；这只安装 CLI，不会自动升级独立复制到 /opt 下的服务。
 
 ## 主服务器
 
@@ -100,7 +100,7 @@ journalctl -u certrelay-agent.service -n 30 --no-pager
 
 ## 0.3.1 命令差异
 
-本仓库新增以下子命令，npm 0.3.0 暂不包含：
+0.3.1 新增以下子命令，旧版 npm 0.3.0 不包含：
 
 ```bash
 certrelay init-admin --data-dir /var/lib/certrelay

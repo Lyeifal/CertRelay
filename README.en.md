@@ -39,8 +39,8 @@ As of November 3, 2026:
 
 | Source | Version | Status |
 | --- | --- | --- |
-| Public npm | `0.3.0` | Published; includes server, agent, and installer commands |
-| This repository | `0.3.1` | Development version; not published to npm; adds unified password and path commands |
+| Public npm | `0.3.1` | Published automatically by GitHub Actions; the latest tag points here |
+| This repository | `0.3.1` | Includes unified password/path commands; documentation may receive post-release updates |
 
 Updating this repository does not upgrade deployed servers. Do not rerun the installer over an existing production deployment as an upgrade strategy.
 
@@ -59,7 +59,7 @@ The npm package does not install Node.js, Nginx, or acme.sh, and does not config
 ### 1. Install the published CLI
 
 ```bash
-npm install -g certrelay@0.3.0
+npm install -g certrelay@0.3.1
 certrelay --help
 ```
 
@@ -132,7 +132,7 @@ You choose the console password: **14–1024 characters**, with no mandatory ran
 - Forgot it? Stop the service on the central server, reset the password, and restart.
 - A password change does not replace certificates, DNS credentials, or agent identities.
 
-After installing the repository's 0.3.1 CLI, you can use the following unified command. It is not available in npm 0.3.0:
+After installing CLI version 0.3.1 or newer, you can use the following unified command. It is not available in the older npm 0.3.0 release:
 
 ```bash
 systemctl stop certrelay

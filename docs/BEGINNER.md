@@ -25,9 +25,9 @@
 
 ## 版本说明：不要混淆新旧命令
 
-- 公共 npm 已发布 **0.3.0**，有 `certrelay-init`、`certrelay-reset-password`、`certrelay-agent` 和两个 install 命令。
-- 本地开发 **0.3.1** 尚未发布/部署，新增 `certrelay init-admin`、`certrelay reset-password`、`certrelay paths`，改善目录识别及提示。
-- 在本项目可用 `node scripts/certrelay.mjs --help` 运行新版；`npm install -g certrelay` 暂不会取得这些新功能。
+- 公共 npm 已发布 **0.3.1**，包含 `certrelay init-admin`、`certrelay reset-password`、`certrelay paths`，改善目录识别及提示。
+- 旧版 **0.3.0** 已有 `certrelay-init`、`certrelay-reset-password`、`certrelay-agent` 和两个 install 命令，但没有新增的统一子命令。
+- `npm install -g certrelay@0.3.1` 可取得新版 CLI；在本项目也可用 `node scripts/certrelay.mjs --help`。安装全局 CLI 不会自动替换已有 /opt 应用副本或升级生产服务。
 - 安装器尚未完成真实 Linux 首装/systemd 验收，已有生产部署不用重装。npm 安装不包含 Node.js、Nginx、acme.sh、HTTPS 引导或 DNS 配置。
 
 ## 第一次设置面板密码
@@ -36,7 +36,7 @@
 
 **只在主服务器执行。** 默认生产数据目录为 `/var/lib/certrelay`，自定义过就替换成实际目录。首次设置用 init；已有管理员不能用 init 覆盖。
 
-本地新版安装后：
+0.3.1 CLI 安装后：
 
 ```bash
 systemctl stop certrelay
@@ -44,7 +44,7 @@ certrelay init-admin --data-dir /var/lib/certrelay
 systemctl start certrelay
 ```
 
-公共 0.3.0，在已经创建 certrelay 用户和数据目录的部署中，中间一行用：
+旧版 0.3.0，在已经创建 certrelay 用户和数据目录的部署中，中间一行用：
 
 ```bash
 sudo -u certrelay env CERTRELAY_DATA_DIR=/var/lib/certrelay certrelay-init
@@ -60,7 +60,7 @@ sudo -u certrelay env CERTRELAY_DATA_DIR=/var/lib/certrelay certrelay-init
 
 **在主服务器 SSH 终端执行，不在客户端执行。** 需要你有服务器管理权限，这不是一个公开的任意人可调用的重置入口。
 
-本地新版：
+0.3.1 CLI：
 
 ```bash
 systemctl stop certrelay
@@ -68,7 +68,7 @@ certrelay reset-password --data-dir /var/lib/certrelay
 systemctl start certrelay
 ```
 
-公共 0.3.0：中间一行替换为：
+旧版 0.3.0：中间一行替换为：
 
 ```bash
 sudo -u certrelay env CERTRELAY_DATA_DIR=/var/lib/certrelay certrelay-reset-password
@@ -103,7 +103,7 @@ sudo -u certrelay env CERTRELAY_DATA_DIR=/var/lib/certrelay \
 已有客户端不要重登。下面只用于已准备好 Node.js、npm、Nginx 的新客户端；安装器不会自动配置你的业务站点。
 
 ```bash
-npm install -g certrelay@0.3.0
+npm install -g certrelay@0.3.1
 certrelay install-agent
 certrelay-agent enroll --identity /etc/certrelay-agent/identity.json
 ```
@@ -150,7 +150,7 @@ journalctl -u certrelay-agent.service -n 30 --no-pager
 
 每台 `/etc/certrelay-agent/config.json` 的 `directoryRoot` 决定 managed 根目录；旧手工模式以 `certificates` 中的 `directory` 为准。不要只按默认示例修改现有 Nginx。
 
-本地新版在**对应客户端**可查询路径，支持中文域名：
+0.3.1 CLI 在**对应客户端**可查询路径，支持中文域名：
 
 ```bash
 certrelay paths --domain example.com

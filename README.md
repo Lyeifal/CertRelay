@@ -39,8 +39,8 @@ DNS 凭据只在主服务器保存；提供 HTTPS 的客户端仍须保存证书
 
 | 来源 | 版本 | 说明 |
 | --- | --- | --- |
-| 公共 npm | `0.3.0` | 已发布，包含服务端、客户端及安装命令 |
-| 本仓库 | `0.3.1` | 开发版本，尚未发布 npm；新增统一密码与路径命令 |
+| 公共 npm | `0.3.1` | 已经由 GitHub Actions 自动发布，latest 指向此版本 |
+| 本仓库 | `0.3.1` | 包含统一密码与路径命令，后续文档可能先于下一版更新 |
 
 GitHub 源码更新不会自动升级已部署服务器。不要通过重跑安装器覆盖现有生产配置。
 
@@ -59,7 +59,7 @@ npm 包不包含 Node.js、Nginx、acme.sh，不会配置 DNS、业务反代或�
 ### 1. 安装已发布的 CLI
 
 ```bash
-npm install -g certrelay@0.3.0
+npm install -g certrelay@0.3.1
 certrelay --help
 ```
 
@@ -132,7 +132,7 @@ ssl_certificate_key /etc/certrelay-certs/example.com/current/privkey.pem;
 - 忘记密码：在主服务器终端停服、重置、再启动。
 - 改密码不会更换证书、DNS 凭据或客户端身份。
 
-本仓库 0.3.1 安装为 CLI 后可用（npm 0.3.0 暂无这些统一子命令）：
+安装 0.3.1 或更新版本的 CLI 后可用（旧版 0.3.0 没有这些统一子命令）：
 
 ```bash
 systemctl stop certrelay
