@@ -2,6 +2,8 @@
 
 [中文 README](../README.md) · [English README](../README.en.md)
 
+已完成的发布记录、升级边界及已知问题见 [v0.3.1 发布说明](RELEASE-v0.3.1.md)。本页是后续发布操作指南。
+
 工作流：`.github/workflows/publish.yml`。采用 npm Trusted Publishing / GitHub OIDC，不需要配置长期 npm Token。本配置依据 2026-11-03 的官方要求：Node.js >= 22.14.0、npm >= 11.5.1、GitHub 托管 runner；实际使用 Node.js 24 与固定 npm 11.21.1。
 
 工作流显式启用 provenance，用于当前公开仓库和公开 npm 包；若以后把仓库改为私有，需重新评估该配置，npm 不支持私有仓库的 provenance。

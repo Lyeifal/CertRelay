@@ -188,13 +188,14 @@ npm test
 
 仓库提供 `.github/workflows/publish.yml`：发布稳定版 GitHub Release 后，先校验版本与运行测试，再通过 npm Trusted Publishing 发布。普通 push 不会发布，也不需要保存长期 npm Token。
 
-首次需在 GitHub 创建 `npm` 环境，并在 npm 包设置中配置可信发布者：用户 `Lyeifal`、仓库 `CertRelay`、工作流 `publish.yml`、环境 `npm`，允许 `npm publish`。详细步骤见[自动发布说明](docs/PUBLISHING.md)。配置文件本身不代表已成功完成首次自动发布，也不会自动升级线上服务器。
+首次需在 GitHub 创建 `npm` 环境，并在 npm 包设置中配置可信发布者：用户 `Lyeifal`、仓库 `CertRelay`、工作流 `publish.yml`、环境 `npm`，允许 `npm publish`。详细步骤见[自动发布说明](docs/PUBLISHING.md)。2026-11-03 已成功自动发布 0.3.1，并完成既有三机升级验证；发布本身不会自动升级线上服务器。实际结果、升级边界及健康接口版本显示问题见[v0.3.1 发布说明](docs/RELEASE-v0.3.1.md)。
 
 ## 更多文档
 
 - [小白使用指南](docs/BEGINNER.md)：密码、证书路径、登记、Nginx 和排障。
 - [安装说明](docs/INSTALL.md)：运行环境、版本差异与安装器限制。
 - [客户端登记协议](docs/ENROLLMENT.md)：一次性邀请、令牌与身份边界。
+- [v0.3.1 发布说明](docs/RELEASE-v0.3.1.md)：发布记录、升级注意事项与已知问题。
 - [文档索引](docs/README.md)。
 
 公开仓库不包含个人服务器运维记录、凭据、运行状态、部署备份或诊断数据。

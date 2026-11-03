@@ -188,7 +188,7 @@ The legacy `npm run preview` prototype has no production authentication and must
 
 `.github/workflows/publish.yml` validates and tests a stable GitHub Release before publishing through npm Trusted Publishing. Ordinary pushes do not publish, and no long-lived npm token is needed.
 
-First create a GitHub environment named `npm` and configure the npm trusted publisher: owner `Lyeifal`, repository `CertRelay`, workflow `publish.yml`, environment `npm`, with `npm publish` allowed. See the [publishing guide](docs/PUBLISHING.md) (Chinese). Adding the workflow does not validate the first real OIDC publication or upgrade deployed servers.
+First create a GitHub environment named `npm` and configure the npm trusted publisher: owner `Lyeifal`, repository `CertRelay`, workflow `publish.yml`, environment `npm`, with `npm publish` allowed. See the [publishing guide](docs/PUBLISHING.md) (Chinese). Version 0.3.1 was successfully published on November 3, 2026, and existing three-host deployments were subsequently upgraded and verified. Publication itself does not upgrade servers. See the [v0.3.1 release notes](docs/RELEASE-v0.3.1.md), including the health endpoint version-display issue.
 
 ## Documentation
 
@@ -197,6 +197,7 @@ The supporting guides currently use Chinese:
 - [Beginner guide](docs/BEGINNER.md): passwords, paths, enrollment, Nginx, and troubleshooting.
 - [Installation guide](docs/INSTALL.md): prerequisites, version differences, and installer limitations.
 - [Enrollment protocol](docs/ENROLLMENT.md): one-time invitations, tokens, and identity boundaries.
+- [v0.3.1 release notes](docs/RELEASE-v0.3.1.md): publication record, upgrade boundaries, known issues, and an English summary.
 - [Documentation index](docs/README.md).
 
 The public repository excludes personal server inventories, credentials, runtime state, deployment backups, and diagnostic data.

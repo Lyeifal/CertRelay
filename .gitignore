@@ -42,3 +42,4 @@ server.lock
 !/docs/INSTALL.md
 !/docs/ENROLLMENT.md
 !/docs/PUBLISHING.md
+!/docs/RELEASE-v0.3.1.md
